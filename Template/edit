@@ -1,0 +1,19 @@
+app.use(express.static('client/dist'));
+
+// Add React Front End Routing
+app.get('*',function (req,res) {
+    res.sendFile(path.resolve(__dirname,'client','dist','index.html'))
+})
+
+
+
+export default defineConfig({
+  plugins: [react()],
+  server:{
+    proxy:{
+      '/api/':{
+        target:"http://localhost:8000"
+      }
+    }
+  }
+})
